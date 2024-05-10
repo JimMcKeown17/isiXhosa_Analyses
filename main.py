@@ -6,7 +6,7 @@ import csv
 
 # Path to the directory containing the PDF files
 directory_path = 'isiXhosa Stories'
-
+ignore_words = ['nalibali.org', 'author', 'story', 'illustrator', 'this', 'is', 'also', 'available', 'in:' 'english', 'afrikaans', 'isizulu', 'sepedi', 'sesotho', 'setswana', 'xitsonga', 'English', 'english']
 word_count = {}
 letter_count = {}
 
@@ -26,7 +26,7 @@ for filename in os.listdir(directory_path):
                         # Remove unwanted characters and clean the word
                         cleaned_word = word.lower().replace('/', '').replace('-', '')
                         # Exclude single-character words
-                        if len(cleaned_word) > 1:
+                        if len(cleaned_word) > 1 and cleaned_word not in ignore_words:
                             word_count[cleaned_word] = word_count.get(cleaned_word, 0) + 1
                         # Count letters
                         for letter in cleaned_word:
